@@ -41,7 +41,15 @@ namespace ConsoleApplication1
         {
             using(NorthwindContext cx=new NorthwindContext())
             {
-
+                var empl = (from emp in cx.Employees
+                            join ord in cx.Orders on emp.EmployeeID equals ord.EmployeeID
+                            select new
+                            {
+                                Employee=emp.FirstName,
+                                Orders=ord.OrderID
+                            });
+                        
+                
             }
         }
 
